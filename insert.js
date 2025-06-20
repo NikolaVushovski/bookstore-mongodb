@@ -1,14 +1,12 @@
-// Switch to or create the bookstore database
-use bookstore;
+const db = connect("mongodb://localhost:27017/bookstore");
 
-// Clear collections if they exist
 db.books.drop();
 db.authors.drop();
 db.customers.drop();
 db.orders.drop();
 db.reviews.drop();
 
-// Insert 10 documents into the books collection
+
 db.books.insertMany([
   { title: "The Great Gatsby", author_id: ObjectId(), price: 9.99, genres: ["Fiction", "Classic"], stock: 50, details: { pages: 180, year: 1925 } },
   { title: "1984", author_id: ObjectId(), price: 12.99, genres: ["Dystopian", "Fiction"], stock: 30, details: { pages: 328, year: 1949 } },
@@ -22,7 +20,6 @@ db.books.insertMany([
   { title: "Jane Eyre", author_id: ObjectId(), price: 9.49, genres: ["Romance", "Gothic"], stock: 50, details: { pages: 500, year: 1847 } }
 ]);
 
-// Insert 10 documents into the authors collection
 db.authors.insertMany([
   { name: "F. Scott Fitzgerald", nationality: "American", books: ["The Great Gatsby"], bio: { born: 1896, died: 1940 } },
   { name: "George Orwell", nationality: "British", books: ["1984", "Animal Farm"], bio: { born: 1903, died: 1950 } },
@@ -50,7 +47,7 @@ db.customers.insertMany([
   { name: "Ethan Thomas", email: "ethan@example.com", address: { city: "Amsterdam", country: "Netherlands" }, orders: [] }
 ]);
 
-// Insert 10 documents into the orders collection
+
 db.orders.insertMany([
   { customer_id: ObjectId(), book_ids: [ObjectId(), ObjectId()], total_amount: 22.98, order_date: new Date("2025-01-01") },
   { customer_id: ObjectId(), book_ids: [ObjectId()], total_amount: 12.99, order_date: new Date("2025-01-02") },
@@ -64,7 +61,7 @@ db.orders.insertMany([
   { customer_id: ObjectId(), book_ids: [ObjectId()], total_amount: 13.99, order_date: new Date("2025-01-10") }
 ]);
 
-// Insert 10 documents into the reviews collection
+
 db.reviews.insertMany([
   { book_id: ObjectId(), customer_id: ObjectId(), rating: 5, comment: "Amazing read!", date: new Date("2025-01-01") },
   { book_id: ObjectId(), customer_id: ObjectId(), rating: 4, comment: "Really enjoyed it.", date: new Date("2025-01-02") },
